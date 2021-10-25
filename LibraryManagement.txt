@@ -1,0 +1,246 @@
+import java.util.*;
+public class LibraryManagement2
+{
+	public static void main(String args[]) throws Exception
+	{
+	Scanner sc=new Scanner(System.in);
+	int bkid,days,ch,n=10,id,max=0;
+	int flag1=0,flag2=0,flag3=0;
+	char ch2;
+	String b[] = new String[n];
+	int a[]=new int[n];
+	int qty[]=new int[n];
+	double fine,amount=0.0;
+	int member[]={1,2,3,4,12,14,15,16,40,121,124};
+	{
+	System.out.println("*****************************************************************************");
+	System.out.println("/////////////////////////////////////////////////////////////////////////////");
+	System.out.println("------------------WELCOME TO LIBRARY MANAGEMENT SYSTEM-----------------------");
+	System.out.println("/////////////////////////////////////////////////////////////////////////////");
+	System.out.println("*****************************************************************************");
+	System.out.println();
+	System.out.println("PLEASE ENTER YOUR LIBRARY ID NUMBER:");
+	id=sc.nextInt();
+	for(int k=0;k<20;k++)
+	{
+	if(member[k]==id)
+	{ System.out.println();
+	System.out.println("*****************WELCOME*******************");
+	System.out.println("YOU HAVE ENTERED A VALID ID NUMBER");
+	System.out.println(" YOU MAY PROCEED ");
+ flag1=0;
+	break;
+	}
+	else
+	{
+	flag1=1;
+	}
+	}
+	if(flag1==1)
+	{
+	System.out.println();
+	System.out.println(" YOU HAVE ENTERED AN INVALID ID NUMBER!!");
+	System.out.println(" ACCESS DENIED ");
+	
+	}
+	else
+
+	{
+
+	do
+	{
+	System.out.println("*************************************************************************");
+	System.out.println("////////////////////////LIBRARY MANAGEMENT SYSTEM////////////////////////");
+	System.out.println("*************************************************************************");
+	System.out.println();
+	System.out.println("WELCOME TO THE LIBRARY MANAGEMENT SYSTEM");
+	System.out.println();
+	System.out.println("1.ADD NEW BOOKS");
+	System.out.println("2.VIEW BOOKS");
+	System.out.println("3.ISSUE BOOKS");
+	System.out.println("4.RETURN BOOKS");
+	System.out.println("5.SEARCH");
+	System.out.println("6.EXIT");
+	System.out.println();
+	System.out.println("ENTER YOUR CHOICE:");
+	ch=sc.nextInt();
+	switch(ch)
+	{
+	case 1:System.out.println("***************************************************************************");
+ System.out.println("//////////////////////// LIBRARY MANAGEMENT SYSTEM ////////////////////////");
+	System.out.println("***************************************************************************");	
+	System.out.println("Enter The No Of Books To Add:");
+	n=sc.nextInt();
+	System.out.println();
+	System.out.println("Enter The Book ID And Book Name:");
+	for(int i=0;i<n;i++)
+	{
+	a[i]=sc.nextInt();
+	b[i]=sc.next();
+	}
+	
+	System.out.println("Enter The Quantity Of the Books In Order");
+	for(int j=0;j<n;j++)
+	{
+	qty[j]=sc.nextInt();
+	}
+	
+	break;
+
+	case 2:System.out.println("*****************************************");
+	System.out.println("//////// The Available Books Are ////////");
+	System.out.println("*****************************************");
+	System.out.println();
+ System.out.println("BOOK ID"+"\t"+" BOOK NAME"+"\t"+"QUANTITY");
+ System.out.println("--------------------------------");
+ for(int i=0;i<n;i++)
+ {
+ 
+ System.out.println(a[i]+"\t"+b[i]+"\t"+"\t"+qty[i]);
+
+ }
+	break;
+
+ case 3:System.out.println("***************************************");
+ System.out.println("///////////// ISSUE BOOK //////////////");
+ System.out.println("***************************************");
+ System.out.println();
+ int ans;
+ do
+ {
+ System.out.println("ENTER THE BOOK ID");
+ bkid=sc.nextInt();
+ for(int i=0;i<n;i++)
+ {
+ if(a[i]==bkid)
+ {
+ System.out.println("********* BOOK FOUND ***********");
+ System.out.println("BOOK ID:"+" "+a[i]);
+ System.out.println("BOOK NAME:"+" "+b[i]);
+ System.out.println("QUANTITY"+" "+qty[i]);
+ qty[i]=qty[i]-1;
+ max=max+1;
+ flag2=0;
+ break;
+ }
+ else
+ {
+ flag2=1;
+ }
+ }
+ if(flag2==1)
+ {
+ System.out.println("YOU HAVE ENTERED AN INVALID ID");
+ }
+ 
+ if(max>4)
+ {
+ System.out.println("YOU HAVE EXCEEDED THE LIMIT!!!");
+ ans=0;
+ }
+ else
+ {
+ System.out.println("Do You Want To Borrow Another Book?");
+ System.out.println("[Enter 1 For Yes And 0 for No]");
+ ans=sc.nextInt();
+ }
+ }while(ans==1);
+ break; 
+	case 4:System.out.println("***************************************");
+	System.out.println("///////////// RETURN BOOKS ///////////");
+	System.out.println("***************************************");
+	System.out.println();
+	System.out.println("Enter the book ID:");
+	bkid=sc.nextInt();
+	for(int i=0;i<n;i++)
+	{
+	if(a[i]==bkid)
+	{
+	
+	System.out.println();
+	System.out.println("*****BOOK FOUND*****");
+	System.out.println();
+	System.out.println("BOOK ID:"+" "+a[i]);
+	System.out.println("NAME:"+" "+b[i]);
+	System.out.println("QUANTITY:"+" "+qty[i]);
+	System.out.println("Enter The No Of Days It Was Borrowed For:");
+ days=sc.nextInt();
+ if(days>7&&days<=14)
+ {
+ amount=15.0;
+ }
+ else if(days>14&&days<=28)
+ {
+ amount=30.0;
+ }
+ else if(days>28)
+ {
+ amount=100.0;
+ }
+ else if(days<=0)
+ {
+ System.out.println("INVALID!!");
+ }
+ else
+ {
+ amount=0.0;
+ }
+ System.out.println("The Amount To Be Paid:"+amount);
+ qty[i]=qty[i]+1;
+ }
+ }
+ break;
+
+ case 5:System.out.println("*************************************************************************");
+	System.out.println("///////////////////////////// SEARCH A BOOK /////////////////////////////");
+	System.out.println("*************************************************************************"); 
+ System.out.println();
+ System.out.println("Enter The Book ID To Search:");
+ bkid=sc.nextInt();
+ for(int i=0;i<n;i++)
+ {
+ if(a[i]==bkid)
+ {
+ System.out.println("Book ID:"+" "+a[i]+" ");
+ System.out.println("Name:"+" "+b[i]);
+ System.out.println("Quantity:"+" "+qty[i]);
+ flag3=0;
+ break;
+ } 
+ else
+ { 
+ flag3=1;
+ }
+ } 
+ if(flag3==1)
+ {
+ System.out.println("BOOK NOT FOUND!!!");
+ System.out.println("PLEASE ENTER ANOTHER CHOICE");
+ break;
+ }
+ 
+ break;
+
+ case 6: { System.out.println("THANK YOU for using Library Management System");
+ break;
+ }
+
+
+ default:{
+ System.out.println("INVALID CHOICE!!");
+ break;
+	
+	}
+ } 
+ 
+ System.out.println("Do You Want To Continue:(y/n)");
+ ch2=sc.next().charAt(0);
+	
+	}while(ch2=='y');
+
+	}
+	}
+
+	}
+ 
+}
